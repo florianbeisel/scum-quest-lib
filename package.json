@@ -23,6 +23,7 @@
     "test:coverage:watch": "vitest run --coverage --watch",
     "test:coverage:ui": "vitest run --coverage --ui",
     "generate-schema": "tsx scripts/generate-schemas.ts",
+    "validate-examples": "tsx scripts/validate-examples.ts",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
@@ -33,7 +34,8 @@
   },
   "files": [
     "dist",
-    "jsco-schemas"
+    "jsco-schemas",
+    "examples"
   ],
   "keywords": [
     "scum",
@@ -45,7 +47,8 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./schemas": "./jsco-schemas/quest.json"
+    "./schemas": "./jsco-schemas/quest.json",
+    "./examples": "./examples"
   },
   "dependencies": {
     "tslib": "^2.8.1",
