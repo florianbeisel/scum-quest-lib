@@ -1,0 +1,373 @@
+{
+  "$ref": "#/definitions/conditions",
+  "definitions": {
+    "conditions": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "CanBeAutoCompleted": {
+              "type": "boolean",
+              "default": false
+            },
+            "TrackingCaption": {
+              "type": "string"
+            },
+            "SequenceIndex": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "LocationsShownOnMap": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Location": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "X": {
+                            "type": "number"
+                          },
+                          "Y": {
+                            "type": "number"
+                          },
+                          "Z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "X",
+                          "Y",
+                          "Z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "SizeFactor": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "default": 1
+                  }
+                },
+                "required": [
+                  "Location"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "Type": {
+              "type": "string",
+              "const": "Elimination"
+            },
+            "TargetCharacters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            },
+            "Amount": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "AllowedWeapons": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "SequenceIndex",
+            "Type",
+            "TargetCharacters",
+            "Amount"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "CanBeAutoCompleted": {
+              "type": "boolean",
+              "default": false
+            },
+            "TrackingCaption": {
+              "type": "string"
+            },
+            "SequenceIndex": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "LocationsShownOnMap": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Location": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "X": {
+                            "type": "number"
+                          },
+                          "Y": {
+                            "type": "number"
+                          },
+                          "Z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "X",
+                          "Y",
+                          "Z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "SizeFactor": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "default": 1
+                  }
+                },
+                "required": [
+                  "Location"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "Type": {
+              "type": "string",
+              "const": "Fetch"
+            },
+            "DisablePurchaseOfRequiredItems": {
+              "type": "boolean",
+              "default": false
+            },
+            "PlayerKeepsItems": {
+              "type": "boolean",
+              "default": false
+            },
+            "RequiredItems": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "AcceptedItems": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1
+                  },
+                  "RequiredNum": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "RandomAdditionalRequiredNum": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "MinAcceptedItemUses": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "MinAcceptedCookLevel": {
+                    "type": "string",
+                    "enum": [
+                      "Raw",
+                      "Undercooked",
+                      "Cooked",
+                      "Overcooked",
+                      "Burned"
+                    ]
+                  },
+                  "MaxAcceptedCookLevel": {
+                    "type": "string",
+                    "enum": [
+                      "Raw",
+                      "Undercooked",
+                      "Cooked",
+                      "Overcooked",
+                      "Burned"
+                    ]
+                  },
+                  "MinAcceptedCookQuality": {
+                    "type": "string",
+                    "enum": [
+                      "Ruined",
+                      "Bad",
+                      "Poor",
+                      "Good",
+                      "Excellent",
+                      "Perfect"
+                    ]
+                  },
+                  "MinAcceptedItemMass": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "MinAcceptedItemHealth": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "MinAcceptedItemResourceRatio": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "MinAcceptedItemResourceAmount": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                },
+                "required": [
+                  "AcceptedItems",
+                  "RequiredNum"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "SequenceIndex",
+            "Type",
+            "RequiredItems"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "CanBeAutoCompleted": {
+              "type": "boolean",
+              "default": false
+            },
+            "TrackingCaption": {
+              "type": "string"
+            },
+            "SequenceIndex": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "LocationsShownOnMap": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Location": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "X": {
+                            "type": "number"
+                          },
+                          "Y": {
+                            "type": "number"
+                          },
+                          "Z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "X",
+                          "Y",
+                          "Z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "string"
+                      }
+                    ]
+                  },
+                  "SizeFactor": {
+                    "type": "number",
+                    "exclusiveMinimum": 0,
+                    "default": 1
+                  }
+                },
+                "required": [
+                  "Location"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "Type": {
+              "type": "string",
+              "const": "Interaction"
+            },
+            "Locations": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "AnchorMesh": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "Instance": {
+                    "type": "integer"
+                  },
+                  "FallbackTransform": {
+                    "type": "string"
+                  },
+                  "VisibleMesh": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "AnchorMesh"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            },
+            "MinNeeded": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "MaxNeeded": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "SpawnOnlyNeeded": {
+              "type": "boolean",
+              "default": true
+            },
+            "WorldMarkersShowDistance": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 50
+            }
+          },
+          "required": [
+            "SequenceIndex",
+            "Type",
+            "Locations",
+            "MinNeeded",
+            "MaxNeeded"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

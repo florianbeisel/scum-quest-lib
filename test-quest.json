@@ -1,0 +1,54 @@
+{
+  "AssociatedNpc": "GeneralGoods",
+  "Tier": 1,
+  "Title": "General Goods trader's Special",
+  "Description": "Collect apples for the General Goods trader and get a small reward.",
+  "TimeLimitHours": 24.0,
+  "RewardPool": [
+    {
+      "CurrencyNormal": 100,
+      "Fame": 5,
+      "Skills": [
+        {
+          "Skill": "Cooking",
+          "Experience": 20
+        }
+      ],
+      "TradeDeals": [
+        {
+          "Item": "Pineapple",
+          "Price": 50,
+          "Amount": 1,
+          "Fame": 0
+        }
+      ]
+    }
+  ],
+  "Conditions": [
+    {
+      "TrackingCaption": "Gather apples",
+      "SequenceIndex": 0,
+      "CanBeAutoCompleted": false,
+      "Type": "Fetch",
+      "DisablePurchaseOfRequiredItems": false,
+      "PlayerKeepsItems": true,
+      "RequiredItems": [
+        {
+          "AcceptedItems": ["Apple_2"],
+          "RequiredNum": 3,
+          "MinAcceptedItemHealth": 50.0
+        }
+      ],
+      "LocationsShownOnMap": [
+        {
+          "Location": {
+            "X": 1000.0,
+            "Y": 2000.0,
+            "Z": 50.0
+          },
+          "SizeFactor": 1.0
+        }
+      ]
+    }
+  ]
+}

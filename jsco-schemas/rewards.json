@@ -1,0 +1,100 @@
+{
+  "$ref": "#/definitions/rewards",
+  "definitions": {
+    "rewards": {
+      "type": "object",
+      "properties": {
+        "CurrencyNormal": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "CurrencyGold": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Fame": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "Skills": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Skill": {
+                "type": "string",
+                "enum": [
+                  "Archery",
+                  "Aviation",
+                  "Awareness",
+                  "Boxing",
+                  "Camouflage",
+                  "Cooking",
+                  "Demolition",
+                  "Diving",
+                  "Endurance",
+                  "Engineering",
+                  "Farming",
+                  "Handgun",
+                  "Medical",
+                  "MeleeWeapons",
+                  "Motorcycle",
+                  "Rifles",
+                  "Running",
+                  "Sniping",
+                  "Stealth",
+                  "Survival",
+                  "Tactics",
+                  "Thievery"
+                ]
+              },
+              "Experience": {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "Skill",
+              "Experience"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "TradeDeals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Item": {
+                "type": "string",
+                "minLength": 1
+              },
+              "Price": {
+                "type": "integer",
+                "exclusiveMinimum": 0
+              },
+              "Amount": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "AllowExcluded": {
+                "type": "boolean"
+              },
+              "Fame": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "Item"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

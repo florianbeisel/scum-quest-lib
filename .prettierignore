@@ -1,0 +1,9 @@
+node_modules/
+dist/
+coverage/
+*.js
+*.mjs
+yarn.lock
+package-lock.json
+CHANGELOG.md
+jsco-schemas/

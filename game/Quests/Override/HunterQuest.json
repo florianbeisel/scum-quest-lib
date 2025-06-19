@@ -1,0 +1,34 @@
+{
+  "AssociatedNpc": "Banker",
+  "Tier": 1,
+  "Title": "Banker's Quest",
+  "Description": "Kill 10 rabbits for the hunter.",
+  "RewardPool": [
+    {
+      "CurrencyNormal": 100,
+      "CurrencyGold": 0,
+      "Fame": 5
+    }
+  ],
+  "Conditions": [
+    {
+      "CanBeAutoCompleted": false,
+      "TrackingCaption": "Kill rabbits",
+      "SequenceIndex": 0,
+      "LocationsShownOnMap": [
+        {
+          "Location": {
+            "X": 1000,
+            "Y": 2000,
+            "Z": 50
+          },
+          "SizeFactor": 1
+        }
+      ],
+      "Type": "Elimination",
+      "TargetCharacters": ["Rabbit_2"],
+      "Amount": 10
+    }
+  ],
+  "TimeLimitHours": 24
+}
