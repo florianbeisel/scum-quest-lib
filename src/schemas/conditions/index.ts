@@ -118,3 +118,47 @@ export type FetchCondition = z.infer<typeof FetchConditionSchema>;
 export type InteractionCondition = z.infer<typeof InteractionConditionSchema>;
 export type ItemRequirement = z.infer<typeof ItemRequirementSchema>;
 export type InteractionLocation = z.infer<typeof InteractionLocationSchema>;
+
+// Condition type constants
+export const CONDITION_TYPES = ['Fetch', 'Elimination', 'Interaction'] as const;
+export type ConditionType = (typeof CONDITION_TYPES)[number];
+
+// Helper functions for condition conversion
+export const extractConditionItems = (condition: Condition): string[] => {
+  if (condition.Type === 'Fetch') {
+    return condition.RequiredItems.flatMap(item => item.AcceptedItems);
+  }
+  if (condition.Type === 'Elimination') {
+    return condition.TargetCharacters;
+  }
+  return [];
+};
+
+export const extractInteractionObjects = (condition: Condition): string[] => {
+  if (condition.Type === 'Interaction') {
+    return condition.Locations.map(location => location.AnchorMesh);
+  }
+  return [];
+};
+
+export const getConditionType = (condition: Condition): ConditionType => {
+  return condition.Type;
+};
+
+export const isFetchCondition = (
+  condition: Condition
+): condition is FetchCondition => {
+  return condition.Type === 'Fetch';
+};
+
+export const isEliminationCondition = (
+  condition: Condition
+): condition is EliminationCondition => {
+  return condition.Type === 'Elimination';
+};
+
+export const isInteractionCondition = (
+  condition: Condition
+): condition is InteractionCondition => {
+  return condition.Type === 'Interaction';
+};
