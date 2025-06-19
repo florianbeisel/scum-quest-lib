@@ -4,12 +4,16 @@ import { ConditionSchema } from '../conditions';
 import { RewardSchema } from '../rewards';
 // import { NPCSchema } from '../common/enums'; // No longer needed
 
+// Quest tier type for external use
+export const QuestTierSchema = z.number().int().min(1).max(3);
+export type QuestTier = z.infer<typeof QuestTierSchema>;
+
 export const QuestSchema = z
   .object({
     // Accept both casings for compatibility, normalize to AssociatedNpc
     AssociatedNpc: z.string().min(1).optional(),
     AssociatedNPC: z.string().min(1).optional(),
-    Tier: z.number().int().min(1).max(3),
+    Tier: QuestTierSchema,
     Title: z.string().min(1),
     Description: z.string().min(1),
     RewardPool: z.array(RewardSchema).min(1),

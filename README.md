@@ -240,7 +240,7 @@ console.log('Current quest state:', preview);
 ```typescript
 interface Quest {
   AssociatedNpc: NPC; // Required: Associated NPC
-  Tier: 1 | 2 | 3; // Required: Quest difficulty tier
+  Tier: QuestTier; // Required: Quest difficulty tier (1-3)
   Title: string; // Required: Quest title
   Description: string; // Required: Quest description
   RewardPool: Reward[]; // Required: Array of rewards
@@ -248,6 +248,24 @@ interface Quest {
   TimeLimitHours?: number; // Optional: Time limit in hours
 }
 ```
+
+### QuestTier Type
+
+The library exports a `QuestTier` type that represents valid quest difficulty tiers:
+
+```typescript
+import { QuestTier } from 'scum-quest-library';
+
+// Valid tier values
+const tier1: QuestTier = 1; // Easy
+const tier2: QuestTier = 2; // Medium
+const tier3: QuestTier = 3; // Hard
+
+// TypeScript will error on invalid values
+// const invalidTier: QuestTier = 4; // Error: Type '4' is not assignable to type 'QuestTier'
+```
+
+This allows consuming projects to use the same type without reimplementing the union type.
 
 ### Condition Types
 

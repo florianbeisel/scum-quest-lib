@@ -1,4 +1,4 @@
-export type { Quest } from '../schemas/';
+export type { Quest, QuestTier } from '../schemas/';
 export type { BlockedQuests } from '../schemas/blocked-quests.js';
 export type {
   Reward,
