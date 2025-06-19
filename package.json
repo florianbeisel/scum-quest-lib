@@ -8,11 +8,11 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/florianbeisel/scum-quest-library.git"
+    "url": "https://github.com/florianbeisel/scum-quest-lib.git"
   },
   "author": "Florian Beisel",
   "license": "MIT",
-  "homepage": "https://github.com/florianbeisel/scum-quest-library",
+  "homepage": "https://github.com/florianbeisel/scum-quest-lib",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
