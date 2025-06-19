@@ -1,19 +1,90 @@
 import { describe, it, expect } from 'vitest';
 import { QuestBuilder } from '../src/builders';
-import { QuestSchema } from '../src/schemas/quest'; // Add this import
+import { QuestSchema } from '../src/schemas/quest';
 import { FetchCondition } from '../src/types';
 import fs from 'fs';
 import path from 'path';
 
-// Load the example quest from the examples directory
+// Load example quests from the examples directory
 const loadExampleQuest = (filename: string) => {
-  const filePath = path.join(__dirname, '..', 'examples', filename);
+  const filePath = path.join(__dirname, '..', 'examples', 'Override', filename);
   const content = fs.readFileSync(filePath, 'utf-8');
   return JSON.parse(content);
 };
 
-describe('Real Quest from Game Developer', () => {
-  it('should rebuild the official test quest using builder pattern', () => {
+const loadBlockedQuests = () => {
+  const filePath = path.join(
+    __dirname,
+    '..',
+    'examples',
+    'Blocked',
+    'BlockedQuests.json'
+  );
+  const content = fs.readFileSync(filePath, 'utf-8');
+  return JSON.parse(content);
+};
+
+const loadQuestList = (filename: string) => {
+  const filePath = path.join(
+    __dirname,
+    '..',
+    'examples',
+    'QuestList',
+    filename
+  );
+  const content = fs.readFileSync(filePath, 'utf-8');
+  return JSON.parse(content);
+};
+
+describe('Real Quests from Game Developer', () => {
+  it('should validate all example quests against our schema', () => {
+    const exampleQuests = [
+      'general-goods-quest.json',
+      'Example_Elimination.json',
+      'Example_Fetch.json',
+      'Example_Interact.json',
+    ];
+
+    exampleQuests.forEach(questFile => {
+      const quest = loadExampleQuest(questFile);
+      const result = QuestSchema.safeParse(quest);
+
+      if (!result.success) {
+        console.log(`Validation failed for ${questFile}:`);
+        result.error.issues.forEach((issue, i) => {
+          console.log(
+            `  ${i + 1}. Path: ${issue.path.join('.')} - ${issue.message}`
+          );
+        });
+      }
+
+      expect(result.success, `Quest ${questFile} should be valid`).toBe(true);
+    });
+  });
+
+  it('should validate blocked quests configuration', () => {
+    const blockedQuests = loadBlockedQuests();
+
+    // Basic structure validation
+    expect(blockedQuests).toHaveProperty('BlockAllDefaultQuests');
+    expect(blockedQuests).toHaveProperty('BlockQuestNames');
+    expect(Array.isArray(blockedQuests.BlockQuestNames)).toBe(true);
+  });
+
+  it('should validate quest list files', () => {
+    const customQuestList = loadQuestList('CustomQuestList.json');
+    const defaultQuestList = loadQuestList('DefaultQuestList.json');
+
+    expect(Array.isArray(customQuestList)).toBe(true);
+    expect(Array.isArray(defaultQuestList)).toBe(true);
+
+    // Check that quest list entries are strings (quest paths)
+    customQuestList.forEach((entry: string) => {
+      expect(typeof entry).toBe('string');
+    });
+  });
+
+  it('should rebuild the general goods quest using builder pattern', () => {
     const quest = new QuestBuilder()
       .withNPC('GeneralGoods')
       .withTier(1)
@@ -79,7 +150,6 @@ describe('Real Quest from Game Developer', () => {
     const result = QuestSchema.safeParse(originalQuest);
 
     if (!result.success) {
-      console.log('foo');
       console.log('Schema validation errors:');
       result.error.issues.forEach((issue, i) => {
         console.log(
