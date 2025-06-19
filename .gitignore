@@ -89,3 +89,5 @@ pids
 
 # TernJS port file
 .tern-port
+
+game/
