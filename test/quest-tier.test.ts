@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { QuestTier, QuestTierSchema } from '../src/schemas/quest';
 import { QuestTier as QuestTierFromTypes } from '../src/types';
+import { QuestBuilder } from '../src/builders';
 
 describe('QuestTier Type', () => {
   it('should be properly exported from schemas', () => {
@@ -26,6 +27,8 @@ describe('QuestTier Type', () => {
     expect(QuestTierSchema.safeParse(4).success).toBe(false);
     expect(QuestTierSchema.safeParse(1.5).success).toBe(false);
     expect(QuestTierSchema.safeParse('1').success).toBe(false);
+    expect(QuestTierSchema.safeParse('2').success).toBe(false);
+    expect(QuestTierSchema.safeParse('3').success).toBe(false);
   });
 
   it('should work in quest context', () => {
@@ -33,5 +36,17 @@ describe('QuestTier Type', () => {
       Tier: 3,
     };
     expect(questWithTier.Tier).toBe(3);
+  });
+
+  it('should work with QuestBuilder', () => {
+    const builder = new QuestBuilder();
+
+    // Should accept valid tiers
+    builder.withTier(1);
+    builder.withTier(2);
+    builder.withTier(3);
+
+    // TypeScript should prevent invalid tiers at compile time
+    // builder.withTier(4); // This should cause a TypeScript error
   });
 });

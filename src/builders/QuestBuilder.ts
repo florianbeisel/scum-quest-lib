@@ -1,7 +1,7 @@
 import { QuestSchema } from '../schemas/quest/index.js';
 import { ConditionBuilder } from './conditions/index.js';
 import { RewardBuilder } from './rewards/index.js';
-import type { Quest, Condition, NPC } from '../types';
+import type { Quest, Condition, NPC, QuestTier } from '../types';
 
 export class QuestBuilder {
   private quest: Partial<Quest> = {
@@ -15,7 +15,7 @@ export class QuestBuilder {
     return this;
   }
 
-  withTier(tier: 1 | 2 | 3): this {
+  withTier(tier: QuestTier): this {
     this.quest.Tier = tier;
     return this;
   }

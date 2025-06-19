@@ -262,10 +262,11 @@ const tier2: QuestTier = 2; // Medium
 const tier3: QuestTier = 3; // Hard
 
 // TypeScript will error on invalid values
-// const invalidTier: QuestTier = 4; // Error: Type '4' is not assignable to type 'QuestTier'
+// const invalidTier: QuestTier = 4; // Error: Type '4' is not assignable to type '1 | 2 | 3'
+// const invalidTier: QuestTier = 0; // Error: Type '0' is not assignable to type '1 | 2 | 3'
 ```
 
-This allows consuming projects to use the same type without reimplementing the union type.
+This allows consuming projects to use the same type without reimplementing the union type. The QuestTier is defined as `1 | 2 | 3` (literal number union) for maximum type safety.
 
 ### Condition Types
 

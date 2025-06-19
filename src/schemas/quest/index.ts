@@ -5,7 +5,11 @@ import { RewardSchema } from '../rewards';
 // import { NPCSchema } from '../common/enums'; // No longer needed
 
 // Quest tier type for external use
-export const QuestTierSchema = z.number().int().min(1).max(3);
+export const QuestTierSchema = z.union([
+  z.literal(1),
+  z.literal(2),
+  z.literal(3),
+]);
 export type QuestTier = z.infer<typeof QuestTierSchema>;
 
 export const QuestSchema = z
