@@ -1,6 +1,6 @@
 {
   "name": "scum-quest-library",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "S.C.U.M. Quest Library",
   "type": "module",
   "main": "dist/index.js",
@@ -28,7 +28,8 @@
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,json,md}\"",
-    "ci": "yarn type-check && yarn lint && yarn format:check && yarn test:coverage && yarn build"
+    "ci": "yarn type-check && yarn lint && yarn format:check && yarn test:coverage && yarn build",
+    "semantic-release": "semantic-release"
   },
   "files": [
     "dist",
@@ -67,7 +68,7 @@
     "eslint": "^9.29.0",
     "prettier": "^3.2.5",
     "rollup": "^4.44.0",
-    "semantic-release": "^21.1.2",
+    "semantic-release": "^24.2.5",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.34.1",
