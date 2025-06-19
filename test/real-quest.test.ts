@@ -2,6 +2,15 @@ import { describe, it, expect } from 'vitest';
 import { QuestBuilder } from '../src/builders';
 import { QuestSchema } from '../src/schemas/quest'; // Add this import
 import { FetchCondition } from '../src/types';
+import fs from 'fs';
+import path from 'path';
+
+// Load the example quest from the examples directory
+const loadExampleQuest = (filename: string) => {
+  const filePath = path.join(__dirname, '..', 'examples', filename);
+  const content = fs.readFileSync(filePath, 'utf-8');
+  return JSON.parse(content);
+};
 
 describe('Real Quest from Game Developer', () => {
   it('should rebuild the official test quest using builder pattern', () => {
@@ -65,61 +74,7 @@ describe('Real Quest from Game Developer', () => {
   });
 
   it('should validate the original JSON against our schema', () => {
-    const originalQuest = {
-      AssociatedNpc: 'GeneralGoods', // Fixed casing
-      Tier: 1,
-      Title: "General Goods trader's Special",
-      Description:
-        'Collect apples for the General Goods trader and get a small reward.',
-      TimeLimitHours: 24.0,
-      RewardPool: [
-        {
-          CurrencyNormal: 100,
-          Fame: 5,
-          Skills: [
-            {
-              Skill: 'Cooking',
-              Experience: 20,
-            },
-          ],
-          TradeDeals: [
-            {
-              Item: 'Pineapple',
-              Price: 50,
-              Amount: 1,
-              Fame: 0,
-            },
-          ],
-        },
-      ],
-      Conditions: [
-        {
-          TrackingCaption: 'Gather apples',
-          SequenceIndex: 0,
-          CanBeAutoCompleted: false,
-          Type: 'Fetch',
-          DisablePurchaseOfRequiredItems: false,
-          PlayerKeepsItems: true,
-          RequiredItems: [
-            {
-              AcceptedItems: ['Apple_2'],
-              RequiredNum: 3,
-              MinAcceptedItemHealth: 50.0,
-            },
-          ],
-          LocationsShownOnMap: [
-            {
-              Location: {
-                X: 1000.0,
-                Y: 2000.0,
-                Z: 50.0,
-              },
-              SizeFactor: 1.0,
-            },
-          ],
-        },
-      ],
-    };
+    const originalQuest = loadExampleQuest('general-goods-quest.json');
 
     const result = QuestSchema.safeParse(originalQuest);
 

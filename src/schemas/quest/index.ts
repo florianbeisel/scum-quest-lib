@@ -2,18 +2,32 @@ import { z } from 'zod';
 
 import { ConditionSchema } from '../conditions';
 import { RewardSchema } from '../rewards';
-import { NPCSchema } from '../common/enums';
+// import { NPCSchema } from '../common/enums'; // No longer needed
 
-export const QuestSchema = z.object({
-  // Mandatory properties
-  AssociatedNpc: NPCSchema,
-  Tier: z.number().int().min(1).max(3),
-  Title: z.string().min(1),
-  Description: z.string().min(1),
-  RewardPool: z.array(RewardSchema).min(1),
-  Conditions: z.array(ConditionSchema).min(1),
-  // Optional properties
-  TimeLimitHours: z.number().positive().optional(),
-});
+export const QuestSchema = z
+  .object({
+    // Accept both casings for compatibility, normalize to AssociatedNpc
+    AssociatedNpc: z.string().min(1).optional(),
+    AssociatedNPC: z.string().min(1).optional(),
+    Tier: z.number().int().min(1).max(3),
+    Title: z.string().min(1),
+    Description: z.string().min(1),
+    RewardPool: z.array(RewardSchema).min(1),
+    Conditions: z.array(ConditionSchema).min(1),
+    // Optional properties
+    TimeLimitHours: z.number().positive().optional(),
+  })
+  .refine(data => !!(data.AssociatedNpc || data.AssociatedNPC), {
+    message: 'Either AssociatedNpc or AssociatedNPC is required',
+  })
+  .transform(data => {
+    // Normalize to AssociatedNpc, preferring it if both are present
+    const normalizedNpc = data.AssociatedNpc || data.AssociatedNPC;
+    return {
+      ...data,
+      AssociatedNpc: normalizedNpc,
+      AssociatedNPC: undefined, // Remove the uppercase variant
+    };
+  });
 
 export type Quest = z.infer<typeof QuestSchema>;
