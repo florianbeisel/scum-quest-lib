@@ -53,6 +53,12 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write # to enable use of OIDC for npm provenance
+
     needs: test
     if: github.ref == 'refs/heads/main'
     steps:
