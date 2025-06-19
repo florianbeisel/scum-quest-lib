@@ -197,6 +197,82 @@ collection.exportToFiles();
 collection.importFromFiles();
 ```
 
+## Utility Functions
+
+The library provides several utility functions to help with quest manipulation and form handling:
+
+### Condition Helpers
+
+```typescript
+import {
+  CONDITION_TYPES,
+  extractConditionItems,
+  extractInteractionObjects,
+  isFetchCondition,
+  isEliminationCondition,
+  isInteractionCondition,
+} from 'scum-quest-library';
+
+// Get all condition types
+console.log(CONDITION_TYPES); // ['Fetch', 'Elimination', 'Interaction']
+
+// Extract items from conditions
+const fetchCondition = {
+  /* ... */
+};
+const items = extractConditionItems(fetchCondition); // Returns array of item names
+
+// Extract interaction objects
+const interactionCondition = {
+  /* ... */
+};
+const objects = extractInteractionObjects(interactionCondition); // Returns array of anchor meshes
+
+// Type guards for conditions
+if (isFetchCondition(condition)) {
+  console.log(condition.RequiredItems); // TypeScript knows this is a FetchCondition
+}
+```
+
+### Form Utilities
+
+The library provides utilities for working with forms in consuming applications:
+
+```typescript
+import {
+  questToFormData,
+  formDataToQuest,
+  validateQuestForm,
+  validateConditionForm,
+  validateRewardForm,
+  getConditionTypeOptions,
+  createEmptyCondition,
+  createEmptyReward,
+  type QuestFormData,
+  type ConditionFormData,
+  type RewardFormData,
+} from 'scum-quest-library/utils';
+
+// Convert between quest objects and form data
+const formData = questToFormData(quest);
+const quest = formDataToQuest(formData);
+
+// Validate form data using the original schemas
+const validation = validateQuestForm(formData);
+if (!validation.success) {
+  console.log('Validation errors:', validation.errors);
+}
+
+// Get condition type options for dropdowns
+const conditionTypes = getConditionTypeOptions();
+
+// Create empty conditions and rewards for forms
+const emptyFetchCondition = createEmptyCondition('Fetch');
+const emptyReward = createEmptyReward();
+```
+
+**Note:** The form data types (`QuestFormData`, `ConditionFormData`, `RewardFormData`) are aliases for the original schema types, so you can use the original schemas directly in your forms without any conversion.
+
 ## Schemas and Validation
 
 ### JSON Schemas
