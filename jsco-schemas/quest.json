@@ -6,21 +6,19 @@
       "properties": {
         "AssociatedNpc": {
           "type": "string",
-          "enum": [
-            "Armorer",
-            "Banker",
-            "Barber",
-            "Bartender",
-            "Doctor",
-            "Fischerman",
-            "GeneralGoods",
-            "Mechanic"
-          ]
+          "minLength": 1
+        },
+        "AssociatedNPC": {
+          "type": "string",
+          "minLength": 1
         },
         "Tier": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 3
+          "type": "number",
+          "enum": [
+            1,
+            2,
+            3
+          ]
         },
         "Title": {
           "type": "string",
@@ -213,6 +211,7 @@
                   }
                 },
                 "required": [
+                  "TrackingCaption",
                   "SequenceIndex",
                   "Type",
                   "TargetCharacters",
@@ -374,6 +373,7 @@
                   }
                 },
                 "required": [
+                  "TrackingCaption",
                   "SequenceIndex",
                   "Type",
                   "RequiredItems"
@@ -487,6 +487,7 @@
                   }
                 },
                 "required": [
+                  "TrackingCaption",
                   "SequenceIndex",
                   "Type",
                   "Locations",
@@ -505,12 +506,12 @@
         }
       },
       "required": [
-        "AssociatedNpc",
         "Tier",
         "Title",
         "Description",
         "RewardPool",
-        "Conditions"
+        "Conditions",
+        "TimeLimitHours"
       ],
       "additionalProperties": false
     }

@@ -9,6 +9,7 @@ describe('Basic schemas', () => {
       Tier: 1,
       Title: "Bartender's Quest",
       Description: "Bartender's Quest",
+      TimeLimitHours: 2.0,
       RewardPool: [
         {
           CurrencyNormal: 100,
@@ -16,6 +17,7 @@ describe('Basic schemas', () => {
       ],
       Conditions: [
         {
+          TrackingCaption: 'Find 3 apples',
           Type: 'Fetch',
           SequenceIndex: 0,
           RequiredItems: [
@@ -56,6 +58,7 @@ describe('Basic schemas', () => {
       Tier: 10,
       Title: "Bartender's Quest",
       Description: "Bartender's Quest",
+      TimeLimitHours: 2.0,
       RewardPool: [
         {
           CurrencyNormal: 100,
@@ -63,6 +66,7 @@ describe('Basic schemas', () => {
       ],
       Conditions: [
         {
+          TrackingCaption: 'Find 3 apples',
           Type: 'Fetch',
           SequenceIndex: 0,
           RequiredItems: [

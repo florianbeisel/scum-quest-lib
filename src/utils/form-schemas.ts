@@ -89,6 +89,7 @@ export const createEmptyCondition = (
 ): Condition => {
   const baseCondition = {
     CanBeAutoCompleted: false,
+    TrackingCaption: '',
     SequenceIndex: 0,
   };
 

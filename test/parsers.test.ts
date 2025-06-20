@@ -33,7 +33,13 @@ describe('Quest Parsers', () => {
       .withTier(1)
       .withTitle('Test Quest')
       .withDescription('A test quest')
-      .addFetchCondition(c => c.withSequenceIndex(0).requireItems(['Apple'], 1))
+      .withTimeLimit(24)
+      .addFetchCondition(c =>
+        c
+          .withSequenceIndex(0)
+          .withCaption('Find 1 apple')
+          .requireItems(['Apple'], 1)
+      )
       .addCurrencyReward(100)
       .build();
 
@@ -63,8 +69,12 @@ describe('Quest Parsers', () => {
       .withTier(2)
       .withTitle('Import Test')
       .withDescription('Testing import functionality')
+      .withTimeLimit(48)
       .addFetchCondition(c =>
-        c.withSequenceIndex(0).requireItems(['Wrench'], 1)
+        c
+          .withSequenceIndex(0)
+          .withCaption('Find 1 wrench')
+          .requireItems(['Wrench'], 1)
       )
       .addCurrencyReward(200)
       .build();
@@ -89,8 +99,12 @@ describe('Quest Parsers', () => {
         .withTier(1)
         .withTitle('Parse Test')
         .withDescription('Testing parsing')
+        .withTimeLimit(12)
         .addFetchCondition(c =>
-          c.withSequenceIndex(0).requireItems(['Bandage'], 1)
+          c
+            .withSequenceIndex(0)
+            .withCaption('Find 1 bandage')
+            .requireItems(['Bandage'], 1)
         )
         .addCurrencyReward(50)
         .build()

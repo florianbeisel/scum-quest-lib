@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const BaseConditionSchema = z.object({
   CanBeAutoCompleted: z.boolean().default(false),
-  TrackingCaption: z.string().optional(),
+  TrackingCaption: z.string(),
   SequenceIndex: z.number().int().min(0),
   LocationsShownOnMap: z
     .array(

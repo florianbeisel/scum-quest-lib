@@ -84,6 +84,7 @@
             }
           },
           "required": [
+            "TrackingCaption",
             "SequenceIndex",
             "Type",
             "TargetCharacters",
@@ -245,6 +246,7 @@
             }
           },
           "required": [
+            "TrackingCaption",
             "SequenceIndex",
             "Type",
             "RequiredItems"
@@ -358,6 +360,7 @@
             }
           },
           "required": [
+            "TrackingCaption",
             "SequenceIndex",
             "Type",
             "Locations",

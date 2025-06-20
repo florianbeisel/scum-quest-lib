@@ -27,40 +27,46 @@ describe('Utility Functions', () => {
       const fetchCondition = {
         Type: 'Fetch' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Find items',
         SequenceIndex: 0,
         DisablePurchaseOfRequiredItems: false,
         PlayerKeepsItems: false,
         RequiredItems: [
-          { AcceptedItems: ['Apple', 'Orange'], RequiredNum: 5 },
-          { AcceptedItems: ['Banana'], RequiredNum: 3 },
+          { AcceptedItems: ['Apple'], RequiredNum: 1 },
+          { AcceptedItems: ['Orange'], RequiredNum: 2 },
         ],
       };
 
       const items = extractConditionItems(fetchCondition);
-      expect(items).toEqual(['Apple', 'Orange', 'Banana']);
+      expect(items).toEqual(['Apple', 'Orange']);
     });
 
     it('should extract targets from elimination condition', () => {
       const eliminationCondition = {
         Type: 'Elimination' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Kill targets',
         SequenceIndex: 0,
-        TargetCharacters: ['Puppet', 'Zombie'],
-        Amount: 10,
+        TargetCharacters: ['Puppet', 'Animal'],
+        Amount: 5,
       };
 
       const items = extractConditionItems(eliminationCondition);
-      expect(items).toEqual(['Puppet', 'Zombie']);
+      expect(items).toEqual(['Puppet', 'Animal']);
     });
 
     it('should return empty array for interaction condition', () => {
       const interactionCondition = {
         Type: 'Interaction' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Interact with objects',
         SequenceIndex: 0,
-        Locations: [],
+        Locations: [
+          { AnchorMesh: '/Game/Objects/Tree' },
+          { AnchorMesh: '/Game/Objects/Rock' },
+        ],
         MinNeeded: 1,
-        MaxNeeded: 1,
+        MaxNeeded: 2,
         SpawnOnlyNeeded: true,
         WorldMarkersShowDistance: 50,
       };
@@ -75,6 +81,7 @@ describe('Utility Functions', () => {
       const interactionCondition = {
         Type: 'Interaction' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Interact with objects',
         SequenceIndex: 0,
         Locations: [
           { AnchorMesh: '/Game/Objects/Tree', Instance: 1 },
@@ -94,6 +101,7 @@ describe('Utility Functions', () => {
       const fetchCondition = {
         Type: 'Fetch' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Find items',
         SequenceIndex: 0,
         DisablePurchaseOfRequiredItems: false,
         PlayerKeepsItems: false,
@@ -110,6 +118,7 @@ describe('Utility Functions', () => {
       const condition = {
         Type: 'Fetch' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Find items',
         SequenceIndex: 0,
         DisablePurchaseOfRequiredItems: false,
         PlayerKeepsItems: false,
@@ -125,6 +134,7 @@ describe('Utility Functions', () => {
       const condition = {
         Type: 'Elimination' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Kill targets',
         SequenceIndex: 0,
         TargetCharacters: ['Puppet'],
         Amount: 1,
@@ -139,6 +149,7 @@ describe('Utility Functions', () => {
       const condition = {
         Type: 'Interaction' as const,
         CanBeAutoCompleted: false,
+        TrackingCaption: 'Interact with objects',
         SequenceIndex: 0,
         Locations: [],
         MinNeeded: 1,
@@ -160,8 +171,12 @@ describe('Utility Functions', () => {
         .withTier(1)
         .withTitle('Test Quest')
         .withDescription('A test quest')
+        .withTimeLimit(24)
         .addFetchCondition(c =>
-          c.withSequenceIndex(0).requireItems(['Apple'], 1)
+          c
+            .withSequenceIndex(0)
+            .withCaption('Find 1 apple')
+            .requireItems(['Apple'], 1)
         )
         .addCurrencyReward(100)
         .build();
@@ -179,13 +194,16 @@ describe('Utility Functions', () => {
     it('should convert form data back to quest', () => {
       const formData = {
         AssociatedNpc: 'GeneralGoods',
+        AssociatedNPC: undefined,
         Tier: 2 as const,
         Title: 'Form Test Quest',
         Description: 'Testing form conversion',
+        TimeLimitHours: 48,
         Conditions: [
           {
             Type: 'Fetch' as const,
             CanBeAutoCompleted: false,
+            TrackingCaption: 'Find 1 apple',
             SequenceIndex: 0,
             DisablePurchaseOfRequiredItems: false,
             PlayerKeepsItems: false,
@@ -209,13 +227,16 @@ describe('Utility Functions', () => {
     it('should validate quest form data', () => {
       const validData = {
         AssociatedNpc: 'Bartender',
+        AssociatedNPC: undefined,
         Tier: 1 as const,
         Title: 'Valid Quest',
         Description: 'A valid quest',
+        TimeLimitHours: 24,
         Conditions: [
           {
             Type: 'Fetch' as const,
             CanBeAutoCompleted: false,
+            TrackingCaption: 'Find 1 apple',
             SequenceIndex: 0,
             DisablePurchaseOfRequiredItems: false,
             PlayerKeepsItems: false,

@@ -35,6 +35,7 @@ describe('QuestBuilder', () => {
       .withTier(2)
       .withTitle('Puppet Hunter')
       .withDescription('Eliminate puppets with specific weapons')
+      .withTimeLimit(48)
       .addEliminationCondition(condition =>
         condition
           .withSequenceIndex(0)
@@ -79,11 +80,18 @@ describe('QuestBuilder', () => {
       .withTier(3)
       .withTitle('Complex Mission')
       .withDescription('A multi-step quest')
+      .withTimeLimit(72)
       .addFetchCondition(condition =>
-        condition.withSequenceIndex(0).requireItems(['Apple'], 2)
+        condition
+          .withSequenceIndex(0)
+          .withCaption('Collect 2 apples')
+          .requireItems(['Apple'], 2)
       )
       .addEliminationCondition(condition =>
-        condition.withSequenceIndex(1).eliminateTargets(['Puppet'], 3)
+        condition
+          .withSequenceIndex(1)
+          .withCaption('Kill 3 puppets')
+          .eliminateTargets(['Puppet'], 3)
       )
       .addReward(reward =>
         reward

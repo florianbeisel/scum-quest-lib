@@ -8,10 +8,12 @@ describe('Quest Schema Normalization', () => {
       Tier: 1,
       Title: 'Test Quest',
       Description: 'A test quest',
+      TimeLimitHours: 24,
       RewardPool: [{ CurrencyNormal: 100 }],
       Conditions: [
         {
           Type: 'Fetch',
+          TrackingCaption: 'Find 1 item',
           SequenceIndex: 0,
           RequiredItems: [{ AcceptedItems: ['Item'], RequiredNum: 1 }],
         },
@@ -34,10 +36,12 @@ describe('Quest Schema Normalization', () => {
       Tier: 1,
       Title: 'Test Quest',
       Description: 'A test quest',
+      TimeLimitHours: 24,
       RewardPool: [{ CurrencyNormal: 100 }],
       Conditions: [
         {
           Type: 'Fetch',
+          TrackingCaption: 'Find 1 item',
           SequenceIndex: 0,
           RequiredItems: [{ AcceptedItems: ['Item'], RequiredNum: 1 }],
         },
@@ -59,10 +63,12 @@ describe('Quest Schema Normalization', () => {
       Tier: 1,
       Title: 'Test Quest',
       Description: 'A test quest',
+      TimeLimitHours: 24,
       RewardPool: [{ CurrencyNormal: 100 }],
       Conditions: [
         {
           Type: 'Fetch',
+          TrackingCaption: 'Find 1 item',
           SequenceIndex: 0,
           RequiredItems: [{ AcceptedItems: ['Item'], RequiredNum: 1 }],
         },

@@ -22,8 +22,8 @@ export const QuestSchema = z
     Description: z.string().min(1),
     RewardPool: z.array(RewardSchema).min(1),
     Conditions: z.array(ConditionSchema).min(1),
-    // Optional properties
-    TimeLimitHours: z.number().positive().optional(),
+    // Required properties
+    TimeLimitHours: z.number().positive(),
   })
   .refine(data => !!(data.AssociatedNpc || data.AssociatedNPC), {
     message: 'Either AssociatedNpc or AssociatedNPC is required',
